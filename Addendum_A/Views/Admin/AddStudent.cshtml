@@ -1,0 +1,56 @@
+﻿@model Addendum_A.ViewModel.AdminViewModel
+
+@{
+    ViewData["Title"] = "Add Student";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-12">
+            <h1 class="text-center">Add Student</h1>
+        </div>
+        @if (Model.Show)
+        {
+            <div class="col-12">
+                <form asp-controller="Admin" asp-action="AddStudent" method="post">
+                    <table class="table table-responsive">
+                        <thead>
+                            <tr>
+                                <th>Student Number</th>
+                                <th>Name</th>
+                                <th>Address</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><input class="form-control" asp-for="SingleStudent.StudentNumber"/>
+                                    @Html.ValidationMessageFor(x => x.SingleStudent.StudentNumber, null, new {@style="color: red"})
+                                    </td>
+                                <td><input class="form-control" asp-for="SingleStudent.Name"/>
+                                    @Html.ValidationMessageFor(x => x.SingleStudent.Name, null, new {@style="color: red"})
+                                    </td>
+                                <td><input class="form-control" asp-for="SingleStudent.Address"/>
+                                    @Html.ValidationMessageFor(x => x.SingleStudent.Address, null, new {@style="color: red"})
+                                    </td>
+                            </tr>
+                        </tbody>
+                     </table>
+                     <button type="submit">Submit</button>
+                 </form>
+               </div>
+             }
+             else
+             {
+                 <div class="col-12">
+                     @if (Model.Submited)
+                     {
+                         <h3 class="text-center" style="color: green">@ViewData["Message"]</h3>
+                     }
+                     else
+                     {
+                         <h3 class="text-center" style="color: red">@ViewData["Message"]</h3>
+                     }
+                </div>
+             }
+    </div>
+</div>

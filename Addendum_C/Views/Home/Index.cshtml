@@ -1,8 +1,63 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
+﻿@model Addendum_C.Models.IndexModel
+@{
+    ViewData["Title"] = "ID Number Validation";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+
+<div class="container">
+    <div class="row">
+        <div class="col-12">
+            <h1 class="text-center">ID Number Validation</h1>
+            <h5 class="text-center">Please Enter 13 Digits Of Your ID Number</h5>
+            <br />
+        </div>
+        @if (!Model.Switch)
+       {
+        <div class="col-12">
+            <form asp-controller="Home" asp-action="Index" method="post" >
+                    <div class="col-6">
+                        <input id="Id" class="form-control" placeholder="ID Number" asp-for="IdNumber" />
+                        @Html.ValidationMessageFor(x => x.IdNumber, null, new {@style="color: red"})
+                    </div>
+                    <br />
+                    <div class="col-6">
+                        <button class="btn btn-primary" type="submit">Submit</button>
+                        </div>
+                        </form>
+        </div>
+ }
+        else
+        {
+            @if (Model.Error)
+            {
+                <div class="col-12">
+                    <h3 class="text-center" style="color: red">@ViewData["Message"]</h3>
+                </div>
+            }
+            else
+            {
+                @if (Model.Valid)
+                {
+                    <div class="col-12">
+                        <h3 class="text-center" style="color: green">@ViewData["Message"]</h3>
+                        <div class="row">
+                            <div class="col-6">
+                                <h6 class="text-center">Your date of birth is: <strong>@Model.BirthDate</strong></h6>
+                            </div>
+                            <div class="col-6">
+                                <h6 class="text-center">Your age is: <strong>@Model.Age</strong></h6>
+                            </div>
+                        </div>
+                    </div>
+                }
+                else
+                {
+                    <div class="col-12">
+                        <h3 class="text-center" style="color: red">@ViewData["Message"]</h3>
+                    </div>
+
+                }
+            }
+        }
+    </div>
 </div>

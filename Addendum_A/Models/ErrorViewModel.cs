@@ -1,5 +1,3 @@
-using System;
-
 namespace Addendum_A.Models
 {
     public class ErrorViewModel

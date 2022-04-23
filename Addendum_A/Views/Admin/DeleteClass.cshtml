@@ -1,0 +1,68 @@
+﻿@model Addendum_A.ViewModel.AdminViewModel
+
+@{
+    ViewData["Title"] = "Delete Class";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-12">
+            <h1 class="text-center">List Of Classes</h1>
+        </div>
+        @if (Model.ClassList?.Any() == true)
+       {
+           if (Model.Show)
+           {
+               <div class="col-12">
+                   <form asp-controller="Admin" asp-action="UpdateMark" method="post">
+                       <table class="table table-responsive">
+                           <thead>
+                               <tr>
+                                   <th>Student Number</th>
+                                   <th>Name</th>
+                                   <th>Course</th>
+                                   <th>Instructor's' Name</th>
+                                   <th>Start Time</th>
+                                   <th>End Time</th>
+                               </tr>
+                           </thead>
+                           <tbody>
+                               @foreach (var item in Model.ClassList)
+                               {
+                                   <tr>
+                                       <td>@item.Student.StudentNumber</td>
+                                       <td>@item.Student.Name</td>
+                                       <td>@item.Course.Name</td>
+                                       <td>@item.Instructor.Name</td>
+                                       <td>@item.ClassStart.ToShortTimeString()</td>
+                                       <td>@item.ClassEnd.ToShortTimeString()</td>
+                                       <td><button type="submit" asp-route-id="@item.Id">Delete</button></td>
+                                   </tr>
+                               }
+                         </tbody>
+                       </table>
+                  </form>
+                 </div>
+              }
+              else
+              {
+                  <div class="col-12">
+                      @if (Model.Submited)
+                      {
+                          <h3 class="text-center" style="color: green">@ViewData["Message"]</h3>
+                      }
+                      else
+                      {
+                          <h3 class="text-center" style="color: red">@ViewData["Message"]</h3>
+                      }
+                      </div>
+              }
+              }
+              else
+              {
+                  <div class="col-12">
+                      <h3 class="text-center">No Data Available</h3>
+                      </div>
+              }
+    </div>
+</div>

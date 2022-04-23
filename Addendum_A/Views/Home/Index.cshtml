@@ -1,8 +1,47 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
+﻿@model Addendum_A.ViewModel.StudentViewModel
+
+@{
+    ViewData["Title"] = "Student";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<div class="container">
+    <div class="row">
+        <div class="col-12">
+            <h1 class="text-center">List Of Students</h1>
+        </div>
+        @if (Model.StudentList?.Any() == true)
+       {
+        <div class="col-12">
+            <table class="table table-responsive">
+                <thead>
+                    <tr>
+                        <th>Student Number</th>
+                        <th>Name</th>
+                        <th>Address</th>
+                        <th>Marks</th>
+                        <th>Classes</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model.StudentList)
+                    {
+                        <tr>
+                            <td>@item.StudentNumber</td>
+                            <td>@item.Name</td>
+                            <td>@item.Address</td>
+                            <td><a asp-controller="Home" asp-action="Mark" asp-route-id="@item.Id">View Marks</a></td>
+                            <td><a asp-controller="Home" asp-action="Class" asp-route-id="@item.Id">View Classes</a></td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+       }
+       else
+        {
+            <div class="col-12">
+                <h3 class="text-center">No Data Available</h3>
+            </div>
+        }
+    </div>
 </div>

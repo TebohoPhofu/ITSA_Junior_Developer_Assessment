@@ -1,0 +1,46 @@
+﻿@model Addendum_A.ViewModel.StudentViewModel
+
+@{
+    ViewData["Title"] = "Marks";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-12">
+            <h1 class="text-center">List Of Marks</h1>
+        </div>
+        @if (Model.SingleStudent.Mark != null)
+       {
+        <div class="col-12">
+            <table class="table table-responsive">
+                <thead>
+                    <tr>
+                        <th>Student Number</th>
+                        <th>Name</th>
+                        <th>Course</th>
+                        <th>Module 1</th>
+                        <th>Module 2</th>
+                        <th>Module 3</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>@Model.SingleStudent.StudentNumber</td>
+                        <td>@Model.SingleStudent.Name</td>
+                        <td>@Model.SingleStudent.Mark.Course.Name</td>
+                        <td>@Model.SingleStudent.Mark.Module1</td>
+                        <td>@Model.SingleStudent.Mark.Module2</td>
+                        <td>@Model.SingleStudent.Mark.Module3</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+       }
+       else
+        {
+            <div class="col-12">
+                <h3 class="text-center">No Data Available</h3>
+            </div>
+        }
+    </div>
+</div>

@@ -1,0 +1,73 @@
+﻿@model Addendum_A.ViewModel.AdminViewModel
+
+@{
+    ViewData["Title"] = "Update Marks";
+    int i = 0;
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-12">
+            <h1 class="text-center">List Of Marks</h1>
+        </div>
+        @if (Model.MarkList?.Any() == true)
+       {
+           if (Model.Show)
+           {
+               <div class="col-12">
+                   <form asp-controller="Admin" asp-action="UpdateMark" method="post">
+                       <table class="table table-responsive">
+                           <thead>
+                               <tr>
+                                   <th>Student Number</th>
+                                   <th>Name</th>
+                                   <th>Course</th>
+                                   <th>Module 1</th>
+                                   <th>Module 2</th>
+                                   <th>Module 3</th>
+                               </tr>
+                           </thead>
+                           <tbody>
+                               @foreach (var item in Model.MarkList)
+                               {
+                                   <tr>
+                                       <td hidden="hidden"><input hidden="hidden" asp-for="MarkList[i].Id" value="@item.Id" /></td>
+                                       <td hidden="hidden"><input hidden="hidden" asp-for="MarkList[i].StudentId" value="@item.StudentId" /></td>
+                                       <td hidden="hidden"><input hidden="hidden" asp-for="MarkList[i].CourseId" value="@item.CourseId" /></td>
+                                       <td>@item.Student.StudentNumber</td>
+                                       <td>@item.Student.Name</td>
+                                       <td>@item.Course.Name</td>
+                                       <td><input class="form-control" asp-for="MarkList[i].Module1" value="@item.Module1"/></td>
+                                       <td><input class="form-control" asp-for="MarkList[i].Module2" value="@item.Module2"/></td>
+                                       <td><input class="form-control" asp-for="MarkList[i].Module3" value="@item.Module3"/></td>
+                                       <td hidden="hidden">@(i++)</td>
+                                   </tr>
+                               }
+                         </tbody>
+                       </table>
+                      <button type="submit">Submit</button>
+                  </form>
+                 </div>
+              }
+              else
+              {
+                  <div class="col-12">
+                      @if (Model.Submited)
+                      {
+                          <h3 class="text-center" style="color: green">@ViewData["Message"]</h3>
+                      }
+                      else
+                      {
+                          <h3 class="text-center" style="color: red">@ViewData["Message"]</h3>
+                      }
+                      </div>
+              }
+              }
+              else
+              {
+                  <div class="col-12">
+                      <h3 class="text-center">No Data Available</h3>
+                      </div>
+              }
+    </div>
+</div>
